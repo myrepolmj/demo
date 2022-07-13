@@ -22,7 +22,7 @@ public interface ReviewRepository extends JpaRepository<ReviewDTO, Integer> {
 	@Query(value = "select  rating,count(*) from reviews where review_source=:x group by rating order by rating asc", nativeQuery = true)
 	List<Object[]> findRatings(@Param(value = "x") String x);
 
-	@Query("SELECT c FROM ReviewEntity c WHERE (:rating is null or c.rating = :rating) and (:store is null"
+	@Query("SELECT c FROM ReviewDTO c WHERE (:rating is null or c.rating = :rating) and (:store is null"
 			+ " or c.reviewSource = :store)")
 	Page<ReviewDTO> findByFilters(@Param(value = "rating") String rating, @Param(value = "store") String store,
 			Pageable paging);
